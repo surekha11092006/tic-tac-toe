@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Tic-Tac-Toe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Particle canvas -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="app">
+
+    <!-- ── Title ── -->
+    <header class="title-bar">
+      <h1 class="game-title">
+        <span class="t-x">X</span>
+        <span class="t-divider">·</span>
+        <span class="t-label">TIC TAC TOE</span>
+        <span class="t-divider">·</span>
+        <span class="t-o">O</span>
+      </h1>
+    </header>
+
+    <!-- ── Mode selector ── -->
+    <div class="mode-selector" id="mode-selector">
+      <button class="mode-btn active" id="mode-2p" data-mode="2p">
+        <span class="mode-icon">👥</span>
+        <span>2 Players</span>
+      </button>
+      <button class="mode-btn" id="mode-ai" data-mode="ai">
+        <span class="mode-icon">🤖</span>
+        <span>vs AI</span>
+      </button>
+    </div>
+
+    <!-- AI difficulty (shown in AI mode) -->
+    <div class="diff-selector" id="diff-selector" style="display:none;">
+      <button class="diff-btn active" data-diff="easy">Easy</button>
+      <button class="diff-btn" data-diff="medium">Medium</button>
+      <button class="diff-btn" data-diff="hard">Hard</button>
+    </div>
+
+    <!-- ── Score board ── -->
+    <div class="scoreboard">
+      <div class="score-card" id="score-x">
+        <div class="sc-symbol x-sym">X</div>
+        <div class="sc-info">
+          <div class="sc-name" id="name-x">Player X</div>
+          <div class="sc-score" id="score-x-val">0</div>
+        </div>
+      </div>
+
+      <div class="score-draws">
+        <div class="sc-draw-label">DRAWS</div>
+        <div class="sc-draw-val" id="score-draws">0</div>
+      </div>
+
+      <div class="score-card" id="score-o">
+        <div class="sc-info right">
+          <div class="sc-name" id="name-o">Player O</div>
+          <div class="sc-score" id="score-o-val">0</div>
+        </div>
+        <div class="sc-symbol o-sym">O</div>
+      </div>
+    </div>
+
+    <!-- ── Status bar ── -->
+    <div class="status-bar">
+      <div class="status-text" id="status-text">
+        <span class="turn-symbol" id="turn-symbol">X</span>
+        <span id="turn-msg">'s turn</span>
+      </div>
+    </div>
+
+    <!-- ── Board ── -->
+    <div class="board-wrap">
+      <div class="board" id="board" role="grid" aria-label="Tic-Tac-Toe board">
+        <button class="cell" data-idx="0" role="gridcell" aria-label="Row 1, Column 1"></button>
+        <button class="cell" data-idx="1" role="gridcell" aria-label="Row 1, Column 2"></button>
+        <button class="cell" data-idx="2" role="gridcell" aria-label="Row 1, Column 3"></button>
+        <button class="cell" data-idx="3" role="gridcell" aria-label="Row 2, Column 1"></button>
+        <button class="cell" data-idx="4" role="gridcell" aria-label="Row 2, Column 2"></button>
+        <button class="cell" data-idx="5" role="gridcell" aria-label="Row 2, Column 3"></button>
+        <button class="cell" data-idx="6" role="gridcell" aria-label="Row 3, Column 1"></button>
+        <button class="cell" data-idx="7" role="gridcell" aria-label="Row 3, Column 2"></button>
+        <button class="cell" data-idx="8" role="gridcell" aria-label="Row 3, Column 3"></button>
+      </div>
+
+      <!-- Win line overlay -->
+      <svg class="win-line-svg" id="win-line-svg" viewBox="0 0 300 300" aria-hidden="true">
+        <line id="win-line" x1="0" y1="0" x2="0" y2="0" />
+      </svg>
+    </div>
+
+    <!-- ── Result overlay ── -->
+    <div class="result-overlay" id="result-overlay" aria-live="assertive">
+      <div class="result-card" id="result-card">
+        <div class="result-emoji" id="result-emoji">🎉</div>
+        <div class="result-title" id="result-title">Player X Wins!</div>
+        <div class="result-sub" id="result-sub">Great game!</div>
+        <button class="play-again-btn" id="play-again-btn">Play Again</button>
+      </div>
+    </div>
+
+    <!-- ── Controls ── -->
+    <div class="game-controls">
+      <button class="gc-btn" id="btn-new-game">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-3.51"/>
+        </svg>
+        New Game
+      </button>
+      <button class="gc-btn gc-btn-ghost" id="btn-reset-scores">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
+        </svg>
+        Reset Scores
+      </button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
